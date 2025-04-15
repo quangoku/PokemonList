@@ -7,11 +7,14 @@ interface Data {
     front_default: string;
   };
 }
-const Pokemon = ({ url }) => {
+interface Props {
+  url: string;
+}
+const Pokemon = (props: Props) => {
   const [pokemon, setPokemon] = useState<Data | null>(null);
   useEffect(() => {
     async function getPokemon() {
-      const res = await fetch(url);
+      const res = await fetch(props.url);
       const data = await res.json();
       setPokemon(data);
     }

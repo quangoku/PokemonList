@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Pokemon from "./components/Pokemon";
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
+
 function App() {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [count, setCount] = useState(20);
   useEffect(() => {
     async function getPokemons() {
