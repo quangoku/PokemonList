@@ -43,7 +43,6 @@ function App() {
             ))}
         </div>
         <div className="bg-blue-300">
-          {" "}
           <button
             className="
         cursor-pointer p-5
