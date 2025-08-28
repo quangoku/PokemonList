@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Pokemon from "./components/Pokemon";
-
+import Detail from "./components/Detail";
 interface Pokemon {
   name: string;
   url: string;
@@ -11,6 +11,8 @@ function App() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [count, setCount] = useState(20);
   const [query, setQuery] = useState("");
+  const [showDetail, setShowDetail] = useState(false);
+  const [choosenUrl, setChoosenUrl] = useState("");
 
   useEffect(() => {
     async function getPokemons() {
@@ -24,6 +26,9 @@ function App() {
   }, [count]);
   return (
     <>
+      {showDetail ? (
+        <Detail url={choosenUrl} onClose={() => setShowDetail(false)} />
+      ) : null}
       <div className="bg-blue-300 h-screen text-center">
         <h1 className="text-center text-5xl p-5">POKEMON LIST</h1>
         <input
@@ -39,7 +44,15 @@ function App() {
           {pokemons
             .filter((pokemon) => pokemon.name.toLowerCase().includes(query))
             .map((pokemon) => (
-              <Pokemon key={pokemon.name} url={pokemon.url}></Pokemon>
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  setChoosenUrl(pokemon.url);
+                  setShowDetail(!showDetail);
+                }}
+              >
+                <Pokemon key={pokemon.name} url={pokemon.url}></Pokemon>
+              </div>
             ))}
         </div>
         <div className="bg-blue-300">
