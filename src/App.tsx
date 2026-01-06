@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Pokemon from "./components/Pokemon";
 import Detail from "./components/Detail";
+
 interface Pokemon {
   name: string;
   url: string;
